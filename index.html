@@ -114,7 +114,7 @@ body.play .game svg { max-height: 82vh; }
     </svg>
     <div class="caption">
       <span id="gameState">點一下遊戲區域，再按住 ↑ 或啟動麥克風。</span>
-      <button id="toggleModeBtn" class="secondary" style="padding:4px 10px; font-size:12px;">切換全螢幕遊戲模式 (Space)</button>
+      <button id="toggleModeBtn" class="secondary" disabled style="padding:4px 10px; font-size:12px; cursor:not-allowed; opacity:0.75;" tabindex="-1">僅限按 Space 切換模式</button>
     </div>
   </section>
 
@@ -467,7 +467,7 @@ function toggleDebugMode() {
   document.body.classList.toggle('play', !debug);
   $('debug').hidden = !debug;
   $('modeBadge').textContent = debug ? '除錯模式（按 Space 切換遊戲模式）' : '全螢幕遊戲模式（按 Space 顯示控制台）';
-  $('toggleModeBtn').textContent = debug ? '切換全螢幕遊戲模式 (Space)' : '顯示控制台 (Space)';
+  $('toggleModeBtn').textContent = debug ? '僅限按 Space 切換模式' : '僅限按 Space 顯示控制台';
   $('game').focus({ preventScroll: true });
 }
 
@@ -490,8 +490,6 @@ document.addEventListener('keydown', e => {
 document.addEventListener('keyup', e => {
   if (e.code === 'ArrowUp') held = false;
 });
-
-$('toggleModeBtn').addEventListener('click', toggleDebugMode);
 
 $('inputMode').addEventListener('change', () => {
   silence();
